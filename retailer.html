@@ -2,303 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sales Analysis | Project</title>
+    <title>Retail Analysis | Ahmad Alsharif</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts CDN (uncomment to use alternative fonts) -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"> -->
-    <!-- Modern Theme Styles -->
+    
     <style>
-        /* 
-        * CSS Variables for Theme Customization
-        * Change these values to modify the color scheme
-        * Primary Color: Controls main accent color (neon effect)
-        * Secondary Color: Controls darker accent color
-        * Background: Controls the gradient background
-        */
         :root {
-            /* Theme Color Variables - Customize these */
-            --primary-color: #05d9e8;       /* Main neon color */
-            --secondary-color: #005678;     /* Darker accent color */
-            --background-start: #0d0221;    /* Gradient start color */
-            --background-end: #005678;      /* Gradient end color */
-            
-            /* Font Options - Uncomment to use */
-            /* --main-font: 'Inter', sans-serif; */         /* Default modern font */
-            /* --main-font: 'Poppins', sans-serif; */       /* Clean geometric font */
-            /* --main-font: 'Montserrat', sans-serif; */    /* Elegant sans-serif */
-            /* --main-font: 'Space Mono', monospace; */     /* Tech/Code style */
-            
-            /* Derived Variables (automatically calculated) */
-            --glass-bg: rgba(5, 89, 120, 0.2);          /* Glass card background */
-            --glass-border: rgba(5, 217, 232, 0.3);     /* Glass card border */
-            --dark-bg: var(--background-start);         /* Dark background color */
-            
-            /* Alternative color suggestions - uncomment to use */
-            /* --primary-color: #ff2a6d; */   /* Pink neon */
-            /* --primary-color: #00ff9d; */   /* Green neon */
-            /* --primary-color: #f5d300; */   /* Yellow neon */
+            --primary-color: #05d9e8;
+            --background-start: #0d0221;
+            --background-end: #005678;
+            --glass-bg: rgba(5, 89, 120, 0.15);
+            --glass-border: rgba(5, 217, 232, 0.2);
         }
-        
-        /* 
-        * Fade-in Animation 
-        * Creates smooth entrance animation for page elements
-        * Elements fade in while sliding up slightly
-        */
+
         @keyframes fadeIn {
-            from { 
-                opacity: 0;                 /* Start invisible */
-                transform: translateY(20px); /* Start 20px down */
-            }
-            to { 
-                opacity: 1;                 /* End fully visible */
-                transform: translateY(0);   /* End at normal position */
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* 
-        * Body Styles 
-        * Sets up the page background, typography and animations
-        */
+
         body {
-            background: linear-gradient(135deg, 
-                var(--background-start) 0%, 
-                var(--background-end) 100%); /* Gradient background */
-            color: white;                    /* Default text color */
-            font-family: var(--main-font, 'Inter', 'Segoe UI', sans-serif); /* Uses custom font or defaults */
-            min-height: 100vh;               /* Full viewport height */
-            opacity: 0;                      /* Start invisible for fade-in */
-            animation: fadeIn 1s ease-out forwards; /* Apply fade-in animation */
+            background: linear-gradient(135deg, var(--background-start) 0%, var(--background-end) 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
         }
-        
-        /* 
-        * Neon Text Effect 
-        * Creates gradient text with glow effect
-        * Uses background-clip to make text show gradient
-        */
+
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+
         .neon-text {
-            background: linear-gradient(90deg, 
-                var(--primary-color), #00ff9d); /* Gradient from primary to green */
-            -webkit-background-clip: text;      /* Clip background to text shape */
-            background-clip: text;              /* Standard property */
-            color: transparent;                 /* Make original text transparent */
-            text-shadow: 0 0 8px rgba(5, 217, 232, 0.4); /* Glow effect */
-            transition: all 0.3s ease;          /* Smooth hover transitions */
+            background: linear-gradient(90deg, var(--primary-color), #00ff9d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 5px rgba(5, 217, 232, 0.3));
         }
-        
-        /* 
-        * Glass Card Effect 
-        * Creates frosted glass UI elements with border glow
-        * Uses backdrop-filter for blur effect (modern browsers only)
-        */
+
         .glass-card {
-            background: var(--glass-bg);        /* Semi-transparent background */
-            backdrop-filter: blur(10px);        /* Blur effect behind element */
-            -webkit-backdrop-filter: blur(10px); /* Safari prefix */
-            border: 1px solid var(--glass-border); /* Semi-transparent border */
-            border-radius: 16px;                /* Rounded corners */
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1), /* Soft shadow */
-                        0 0 15px rgba(5, 217, 232, 0.2); /* Neon glow */
-            transition: all 0.3s ease;          /* Smooth hover transitions */
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        
-        /* 
-        * Glass Card Hover State 
-        * Enhances the card with elevation and stronger glow on hover
-        */
-        .glass-card:hover {
-            transform: translateY(-5px);        /* Lift card slightly */
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2), /* Deeper shadow */
-                        0 0 25px rgba(5, 217, 232, 0.3); /* Stronger glow */
-        }
-        
-        /* 
-        * Neon Button Styles 
-        * Creates buttons with semi-transparent background and border glow
-        * Includes hidden overflow for the sliding light effect
-        */
+
         .btn-neon {
-            background: rgba(5, 217, 232, 0.1); /* Semi-transparent background */
-            border: 1px solid var(--primary-color); /* Border with primary color */
-            color: var(--primary-color);        /* Text color matches border */
-            transition: all 0.3s ease;          /* Smooth transitions */
-            position: relative;                 /* For pseudo-element positioning */
-            overflow: hidden;                   /* Hide overflow of pseudo-element */
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        /* 
-        * Neon Button Hover State 
-        * Darkens background and adds glow effect on hover
-        */
+
         .btn-neon:hover {
-            background: rgba(5, 217, 232, 0.3); /* Darker semi-transparent bg */
-            box-shadow: 0 0 15px rgba(5, 217, 232, 0.4); /* Glow effect */
+            background: rgba(5, 217, 232, 0.1);
+            box-shadow: 0 0 20px rgba(5, 217, 232, 0.4);
+            transform: translateY(-2px);
         }
-        
-        /* 
-        * Neon Button Light Effect (Pseudo-element)
-        * Creates sliding light animation on hover
-        * Starts off-screen left (-100%) and slides right
-        */
-        .btn-neon::before {
-            content: '';                        /* Required for pseudo-element */
-            position: absolute;                 /* Absolute positioning */
-            top: 0;                            /* Align to top */
-            left: -100%;                       /* Start off-screen left */
-            width: 100%;                       /* Full width of button */
-            height: 100%;                      /* Full height of button */
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(5, 217, 232, 0.4), 
-                transparent); /* Gradient light effect */
-            transition: all 0.5s ease;         /* Smooth sliding animation */
+
+        .tech-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.4rem 1rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
-        
-        /* 
-        * Neon Button Light Effect on Hover
-        * Slides the light effect from left to right
-        */
-        .btn-neon:hover::before {
-            left: 100%;                        /* End off-screen right */
+
+        .section-divider {
+            border-top: 1px solid rgba(5, 217, 232, 0.1);
+            margin: 3rem 0;
+            padding-top: 2rem;
         }
-        
-        /* 
-        * Image Styling
-        * Adds rounded corners, shadow, and hover effects to images
-        */
+
         img {
-            border-radius: 12px;               /* Slightly rounded corners */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
-            transition: transform 0.3s ease,   /* Smooth transform */
-                        box-shadow 0.3s ease;  /* Smooth shadow changes */
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
         }
-        
-        /* 
-        * Image Hover Effect
-        * Slight scale up and enhanced shadow/glow on hover
-        */
+
         img:hover {
-            transform: scale(1.02);            /* Slight zoom effect */
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), /* Deeper shadow */
-                        0 0 20px rgba(5, 217, 232, 0.3); /* Neon glow */
+            transform: scale(1.01);
+            border-color: var(--primary-color);
         }
-        
-        /* 
-        * List Item Styling
-        * Adds custom bullet points with neon color
-        */
-        li {
-            position: relative;                /* For pseudo-element positioning */
-            padding-left: 1.5em;               /* Space for custom bullet */
-        }
-        
-        /* 
-        * Custom List Bullets
-        * Replaces default bullets with neon-colored chevrons
-        */
-        li::before {
-            content: '  ';                      /* Chevron character */
-            position: absolute;                /* Absolute positioning */
-            left: 0;                          /* Align to left */
-            color: var(--primary-color);      /* Use primary neon color */
-        }
-        
-        /* 
-        * Mobile Responsive Styles
-        * Adjusts layout and effects for smaller screens
-        */
-        @media (max-width: 768px) {
-            body {
-                background: linear-gradient(135deg, 
-                    var(--background-start) 0%, 
-                    #00334d 100%); /* Simpler gradient for mobile */
-            }
+
+        .download-box {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px dashed rgba(5, 217, 232, 0.3);
+            text-align: center;
         }
     </style>
 </head>
-<body>
-    <!-- Navigation -->
-    <!-- <nav class="w-full bg-black bg-opacity-80 py-4 neon-border">
-        <div class="container mx-auto flex justify-between items-center px-6">
-            <a href="index.html" class="neon-text text-xl font-bold">← Back to Portfolio</a>
-            <span class="text-neon-pink font-bold">Neon Dashboard UI</span>
-        </div>
-    </nav> -->
-    <div class="mt-8 ml-8 animate-fade-in" style="animation-delay: 0.2s">
-        <a href="index.html#projects" class="btn-neon px-6 py-3 rounded-full text-lg font-medium transition-all duration-300 inline-flex items-center">
+<body class="p-6 md:p-12">
+
+    <nav class="max-w-5xl mx-auto mb-16 animate-fade-in">
+        <a href="index.html#projects" class="btn-neon px-6 py-2.5 rounded-full text-sm font-bold">
             <i class="fas fa-arrow-left mr-2"></i> Back to Portfolio
         </a>
-    </div>
-    <!-- Project Header -->
-    <header class="text-center py-16 animate-fade-in" style="animation-delay: 0.4s">
-        <h1 class="text-5xl font-bold neon-text mb-4">Global Electronics Retailer</h1>
-        <div class="flex justify-center space-x-4 mb-4">
-            <span class="px-4 py-1 bg-blue-900 bg-opacity-30 rounded-full text-sm font-medium">Business Analysis</span>
-            <span class="px-4 py-1 bg-blue-900 bg-opacity-30 rounded-full text-sm font-medium">SQL</span>
-            <span class="px-4 py-1 bg-blue-900 bg-opacity-30 rounded-full text-sm font-medium">Data Cleaning</span>
-            <span class="px-4 py-1 bg-blue-900 bg-opacity-30 rounded-full text-sm font-medium">Data Visualization</span>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center mb-16 animate-fade-in" style="animation-delay: 0.2s">
+        <h1 class="text-4xl md:text-6xl font-black neon-text mb-6">Global Electronics Retailer</h1>
+        <p class="text-gray-400 text-lg mb-8">Supply Chain Optimization & Sales Strategy Analysis</p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <span class="tech-pill text-cyan-400">SQL</span>
+            <span class="tech-pill text-green-400">Business Intelligence</span>
+            <span class="tech-pill text-blue-400">Data Modeling</span>
+            <span class="tech-pill text-purple-400">Restructuring</span>
         </div>
-        <!-- <p class="text-gray-300 max-w-2xl mx-auto">Advanced analysis of environmental factors affecting crop productivity with interactive visualizations.</p> -->
     </header>
-    <!-- Project Details Section -->
-    <main class="container mx-auto px-6 py-10 glass-card flex justify-center animate-fade-in" style="animation-delay: 0.6s">
-        <div id="retailer" class="toggle-section">
-            <p class="text-gray-300 mb-6 leading-relaxed">In response to the ongoing sea freight logistical challenges and 
-                political tensions in the manufacturing country, the Global Electronic Retailer is proactively seeking to 
-                expand its inventory for North American customers. This strategic initiative aims to ensure a consistent supply 
-                of products, enhancing customer satisfaction and maintaining market competitiveness.
+
+    <main class="max-w-5xl mx-auto space-y-12 animate-fade-in" style="animation-delay: 0.4s">
+        
+        <section class="glass-card p-8 md:p-12">
+            <h2 class="text-2xl font-bold mb-6 flex items-center">
+                <i class="fas fa-globe-americas text-cyan-400 mr-3"></i> Executive Summary
+            </h2>
+            <p class="text-gray-300 leading-relaxed mb-8">
+                To mitigate sea freight logistical challenges and geopolitical tensions, the retailer initiated a proactive inventory expansion for North America. This project analyzes transaction data to determine the most cost-effective and low-risk restocking strategy to maintain market competitiveness.
             </p>
-            <p><b>֎ Strategic Considerations:</b></p>
-            <ul>
-                <p class="text-gray-300 mb-6 leading-relaxed">» Should we restock products with highest sales or highest profit margin?</p>
-                <p class="text-gray-300 mb-6 leading-relaxed">» What are the top 5 products we need to order in a large quantity?</p>
-                <p class="text-gray-300 mb-6 leading-relaxed">» What is the cost of ordering these products?</p>
-                <p class="text-gray-300 mb-6 leading-relaxed">» When the products will arrive?</p> 
-            </ul>
-            <br>
-            <p><b>֎ Data Modeling:</b> </p>
-            <br>
-            <span class="image main"><img src="assets/Projects/Global Electronics Retailer (SQL)/Data Model.png" alt="" /></span>
-            <br>
-            <p><b>֎ Top 5 Highest Sales Products chart</b></p>
-            <br>
-            <span class="image main"><img src="assets/Projects/Global Electronics Retailer (SQL)/Highest Sales Products chart.png" alt="" /></span>
-            <br>
-            <p><b>֎ Analysis outcome: Restocking products with highest sales in North America</b> </p>
-            <p class="text-gray-300 mb-6 leading-relaxed"><b>» Feasibility:</b> Restocking products with the highest sales is more feasible due to lower costs and shorter lead times.</p>
-            <p class="text-gray-300 mb-6 leading-relaxed"><b>» Risk:</b> Restocking high-sales products carries lower risk due to established demand and manageable supply chain timelines.</p>
-            <p class="text-gray-300 mb-6 leading-relaxed"><b>» Benefits:</b> While restocking high-margin products offers higher profitability per unit, restocking high-sales products ensures steady revenue and customer satisfaction.</p>
-            <br>
-            <p><a href="https://maven-datasets.s3.amazonaws.com/Global+Electronics+Retailer/Global+Electronics+Retailer.zip" class="button primary icon solid fa-download" download>Original Dataset</a></p>
-            <!-- <p><a href="assets/Projects/Global Electronics Retailer (SQL)/SQL Code.sql" class="button primary icon solid fa-download" download>Data Extraction SQL Query</a></p>
-            <p><a href="assets/Projects/Global Electronics Retailer (SQL)/SQL Extracted data - ORIGINAL.xlsx" class="button primary icon solid fa-download" download>Original Extracted Datasheet</a></p>
-            <p><a href="assets/Projects/Global Electronics Retailer (SQL)/SQL Extracted data - Transformed.xlsx" class="button primary icon solid fa-download" download>Transformed Extracted Datasheet</a></p> -->
-            </ul>
-        </div>
-    </main>
-    <!-- Footer -->
-    <footer class="py-8 text-center text-gray-400 animate-fade-in" style="animation-delay: 0.8s">
-        <div class="container mx-auto px-6">
-            <div class="border-t border-blue-900 border-opacity-30 pt-8">
-                <p>&copy; 2026 Ahmad Alsharif. All rights reserved.</p>
-                <!-- <div class="flex justify-center space-x-4 mt-4">
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div> -->
+            
+            <div class="grid md:grid-cols-2 gap-8 bg-black/20 p-6 rounded-2xl border border-white/5">
+                <div>
+                    <h3 class="text-white font-bold mb-4 italic">Strategic Questions:</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-question-circle text-cyan-500 mr-2"></i> Restock by Sales Volume or Profit Margin?</li>
+                        <li class="flex items-center"><i class="fas fa-question-circle text-cyan-500 mr-2"></i> Which Top 5 products minimize lead-time risk?</li>
+                        <li class="flex items-center"><i class="fas fa-question-circle text-cyan-500 mr-2"></i> What is the total landed cost of restocking?</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4 italic">Analysis Methodology:</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-database text-green-500 mr-2"></i> Relational Data Modeling (Star Schema)</li>
+                        <li class="flex items-center"><i class="fas fa-code text-green-500 mr-2"></i> SQL-based Aggregation & Cleaning</li>
+                        <li class="flex items-center"><i class="fas fa-chart-line text-green-500 mr-2"></i> Sales Performance Visualizations</li>
+                    </ul>
+                </div>
             </div>
+        </section>
+
+        <section class="glass-card p-8 md:p-12 space-y-16">
+            
+            <div>
+                <h2 class="text-2xl font-bold mb-8"><i class="fas fa-project-diagram text-cyan-400 mr-3"></i>Data Architecture</h2>
+                
+                <img src="assets/Projects/Global Electronics Retailer (SQL)/Data Model.png" alt="Data Schema" class="w-full">
+                <p class="text-center text-sm text-gray-500 mt-4 italic">Relational model used to join product margins with regional sales performance.</p>
+            </div>
+
+            <div class="section-divider">
+                <h2 class="text-2xl font-bold mb-8"><i class="fas fa-trophy text-yellow-400 mr-3"></i>Performance Analysis</h2>
+                <img src="assets/Projects/Global Electronics Retailer (SQL)/Highest Sales Products chart.png" alt="Sales Performance Chart" class="w-full">
+                <div class="mt-8 grid md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-white/5 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-cyan-400 mb-2">Feasibility</h4>
+                        <p class="text-xs text-gray-400">High-volume sales products show shorter manufacturing cycles and lower landed costs.</p>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-green-400 mb-2">Risk Mitigation</h4>
+                        <p class="text-xs text-gray-400">Restocking established demand reduces the risk of "dead stock" during political volatility.</p>
+                    </div>
+                    <div class="p-4 bg-white/5 rounded-xl border border-white/10">
+                        <h4 class="font-bold text-purple-400 mb-2">Growth</h4>
+                        <p class="text-xs text-gray-400">Ensuring steady revenue through high-sales items supports cash flow for future high-margin expansion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <h2 class="text-2xl font-bold mb-4">The Verdict</h2>
+                <p class="text-gray-300 leading-relaxed border-l-4 border-cyan-500 pl-6 py-2">
+                    <strong>Final Recommendation:</strong> Prioritize restocking high-sales products for the North American market. While high-margin items offer more profit per unit, the lower lead times and established consumer demand of high-volume products provide the most stable path through current logistical disruptions.
+                </p>
+            </div>
+
+            <div class="pt-8">
+                <div class="download-box">
+                    <h3 class="text-white font-bold mb-4 italic">Project Assets</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="https://maven-datasets.s3.amazonaws.com/Global+Electronics+Retailer/Global+Electronics+Retailer.zip" class="btn-neon px-5 py-2 rounded-xl text-sm font-semibold">
+                            <i class="fas fa-file-archive mr-2"></i> Dataset (ZIP)
+                        </a>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-16 text-center text-gray-500 animate-fade-in" style="animation-delay: 0.6s">
+        <div class="max-w-5xl mx-auto border-t border-white/10 pt-8">
+            <p>&copy; 2026 Ahmad Alsharif | Data & Business Analytics</p>
         </div>
     </footer>
+
 </body>
 </html>
