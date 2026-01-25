@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Alsharif</title>
+    <title>Ahmad Alsharif | Portfolio</title>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio of Ahmad Alsharif, showcasing data analysis projects and skills.">
     <meta name="keywords" content="Portfolio, Data Analyst, Projects, HTML, CSS, JavaScript, SQL, PowerBi, Tableu, R, Python, Excel">
     
@@ -16,40 +14,54 @@
     <meta property="og:url" content="https://ahmad-alsharif.github.io/Portfolio/">
     <meta property="og:type" content="website">
     
-    <meta itemprop="name" content="Ahmad Alsharif's Portfolio">
-    <meta itemprop="description" content="Portfolio of Ahmad Alsharif, showcasing data analysis projects and skills.">
-    <meta itemprop="image" content="https://ahmad-alsharif.github.io/Portfolio/Assets/Images/man.png">
-    
     <link rel="icon" type="image/png" href="Assets/Images/man.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        :root { scroll-behavior: smooth; }
+        
         body {
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
+            background-color: #080d17;
         }
+
+        ::selection {
+            background: rgba(74, 222, 128, 0.3);
+            color: #4ade80;
+        }
+
         .glass-card {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(74, 222, 128, 0.1), 0 10px 10px -5px rgba(74, 222, 128, 0.04);
-        }
+
         .text-gradient {
             background: linear-gradient(90deg, #4ade80 0%, #3b82f6 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
+
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(74, 222, 128, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
         #vanta-bg {
             position: fixed;
             top: 0;
@@ -58,268 +70,196 @@
             height: 100%;
             z-index: -1;
         }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #080d17; }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #4ade80; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100">
+
+<body class="text-slate-100">
     <div id="vanta-bg"></div>
-    <div class="fixed inset-0 z-0" id="particles-js"></div>
-    <nav class="fixed top-0 left-0 right-0 z-50 py-4 px-6 backdrop-blur-md">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 py-5 px-6 backdrop-blur-lg border-b border-white/5">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gradient">Ahmad Alsharif | Portfolio</a>
-            <div class="hidden md:flex space-x-8">
+            <a href="#" class="text-xl md:text-2xl font-bold text-gradient tracking-tighter">Ahmad Alsharif | Portfolio</a>
+            <div class="hidden md:flex space-x-10 text-sm font-medium uppercase tracking-widest">
                 <a href="#home" class="hover:text-emerald-400 transition-colors">Home</a>
                 <a href="#about" class="hover:text-emerald-400 transition-colors">About</a>
                 <a href="#skills" class="hover:text-emerald-400 transition-colors">Skills</a>
                 <a href="#projects" class="hover:text-emerald-400 transition-colors">Projects</a>
             </div>
-            <button class="md:hidden" id="menu-toggle">
+            <button class="md:hidden text-emerald-400" id="menu-toggle">
                 <i data-feather="menu"></i>
             </button>
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-slate-900 z-40 hidden flex-col items-center justify-center space-y-8">
-        <a href="#home" class="text-2xl hover:text-emerald-400">Home</a>
-        <a href="#about" class="text-2xl hover:text-emerald-400">About</a>
-        <a href="#skills" class="text-2xl hover:text-emerald-400">Skills</a>
-        <a href="#projects" class="text-2xl hover:text-emerald-400">Projects</a>
-        <button id="close-menu" class="absolute top-8 right-8 p-2">
-            <i data-feather="x"></i>
+    <div id="mobile-menu" class="fixed inset-0 bg-slate-950 z-[60] hidden flex-col items-center justify-center space-y-8 backdrop-blur-2xl">
+        <a href="#home" class="text-3xl font-bold hover:text-emerald-400">Home</a>
+        <a href="#about" class="text-3xl font-bold hover:text-emerald-400">About</a>
+        <a href="#skills" class="text-3xl font-bold hover:text-emerald-400">Skills</a>
+        <a href="#projects" class="text-3xl font-bold hover:text-emerald-400">Projects</a>
+        <button id="close-menu" class="absolute top-8 right-8 text-emerald-400">
+            <i data-feather="x" class="w-10 h-10"></i>
         </button>
     </div>
 
     <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div class="container mx-auto text-center glass-card p-12 rounded-2xl max-w-4xl">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn">
+        <div class="container mx-auto text-center glass-card p-8 md:p-16 rounded-3xl max-w-5xl">
+            <h1 class="text-5xl md:text-8xl font-bold mb-6 leading-tight">
                 <span class="text-gradient">Transforming Data</span><br>Into Insights
             </h1>
-            <p class="text-xl md:text-2xl text-slate-300 mb-10 animate-fadeIn animate-delay-200">
+            <p class="text-lg md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
                 I'm a passionate data analyst who turns complex data into actionable business solutions.
             </p>
-            <div class="flex justify-center space-x-4 animate-fadeIn animate-delay-400">
-            </div>
-            <div class="mt-16 animate-bounce animate-infinite animate-duration-2000 animate-delay-500">
-                <a href="#about" class="inline-block">
-                    <i data-feather="chevron-down" class="w-10 h-10 text-emerald-400"></i>
+            <div class="flex flex-col items-center mt-12 animate-bounce">
+                <span class="text-emerald-400/60 text-xs font-bold mb-3 tracking-[0.3em] uppercase">Scroll to Discover</span>
+                <a href="#about">
+                    <i data-feather="chevron-down" class="w-8 h-8 text-emerald-400"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-20 px-6 bg-slate-800/30 backdrop-blur-sm">
+    <section id="about" class="py-24 px-6 bg-slate-900/40">
         <div class="container mx-auto max-w-6xl">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2 glass-card p-8 rounded-2xl">
-                    <img src="Assets/Images/man.png" alt="Data Analyst Working" class="w-full rounded-lg shadow-lg">    
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-2/5 glass-card p-4 rounded-2xl relative">
+                    <img src="Assets/Images/man.png" alt="Data Analyst Profile" class="w-full rounded-lg shadow-lg"> 
                 </div>
                 
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-bold text-center mb-16 text-gradient">About Me</h2>
-                    <p class="text-lg text-slate-300 mb-6">
-                        I’ve always believed that data is only as good as the decisions it helps people make. With a background in Business IT from Cape Breton and a deep dive into Data Analytics at SAIT, I’ve landed in that sweet spot where business logic meets technical execution. I don't just "clean data" for the sake of it; I hunt for the stories hidden in messy datasets and turn them into clear, visual roadmaps that actually move the needle for a business.
-                    </p>
-                    <p class="text-lg text-slate-300 mb-6">
-                        My daily toolkit usually involves a mix of SQL, Python, and Power BI, but I see these as more than just tools—they’re how I solve puzzles. I specialize in taking the technical "heavy lifting" (like complex ETL processes and predictive modeling) and distilling it into dashboards that make sense to everyone, from the engineering team to the CEO. If a report doesn't spark an "aha!" moment, it’s not finished yet.
-                    </p>
-                    <p class="text-lg text-slate-300 mb-6">
-                        What makes my approach different is my history in account management and sales. I’ve spent years in the trenches of operations, so I know what it’s like to need an answer now to a real-world problem. This helps me bridge the gap that often exists between "the numbers" and "the people." I’m not just looking for a technical solution; I’m looking for a practical one that makes someone’s job easier and their strategy smarter.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <div class="flex items-center text-emerald-400">
-                            <i data-feather="award" class="mr-2"></i>
-                            <span>Certified Data Analyst</span>
-                        </div>
-                        <div class="flex items-center text-emerald-400">
-                            <i data-feather="bar-chart-2" class="mr-2"></i>
-                            <span>50+ Dashboards Built</span>
-                        </div>
+                <div class="lg:w-3/5">
+                    <h2 class="text-4xl font-bold mb-8 text-gradient inline-block">About Me</h2>
+                    <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
+                        <p>
+                            I’ve always believed that data is only as good as the decisions it helps people make. With a background in Business IT from Cape Breton and a deep dive into Data Analytics at SAIT, I’ve landed in that sweet spot where business logic meets technical execution. I don't just "clean data" for the sake of it; I hunt for the stories hidden in messy datasets and turn them into clear, visual roadmaps that actually move the needle for a business.
+                        </p>
+                        <p>
+                            My daily toolkit usually involves a mix of SQL, Python, and Power BI, but I see these as more than just tools—they’re how I solve puzzles. I specialize in taking the technical "heavy lifting" (like complex ETL processes and predictive modeling) and distilling it into dashboards that make sense to everyone, from the engineering team to the CEO. If a report doesn't spark an "aha!" moment, it’s not finished yet.
+                        </p>
+                        <p>
+                            What makes my approach different is my history in account management and sales. I’ve spent years in the trenches of operations, so I know what it’s like to need an answer now to a real-world problem. This helps me bridge the gap that often exists between "the numbers" and "the people." I’m not just looking for a technical solution; I’m looking for a practical one that makes someone’s job easier and their strategy smarter.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6">
+    <section id="skills" class="py-24 px-6">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Skills & Expertise</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-emerald-900/20 rounded-full">
-                        <i class="fas fa-chart-bar text-4xl text-emerald-400"></i>
-                    </div>
+            <h2 class="text-4xl font-bold text-center mb-20 text-gradient">Skills & Expertise</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-emerald-900/20 rounded-xl"><i class="fas fa-chart-bar text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Data Insights</h3>
-                    <p class="text-slate-300 text-sm">Translate raw data into actionable insights for smarter decisions.</p>
+                    <p class="text-slate-400 text-sm">Translate raw data into actionable insights for smarter decisions.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-blue-900/20 rounded-full">
-                        <i class="fas fa-chart-line text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-blue-900/20 rounded-xl"><i class="fas fa-chart-line text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Dashboards</h3>
-                    <p class="text-slate-300 text-sm">Design interactive dashboards.</p>
+                    <p class="text-slate-400 text-sm">Design interactive dashboards.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-purple-900/20 rounded-full">
-                        <i class="fas fa-database text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-purple-900/20 rounded-xl"><i class="fas fa-database text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Data Pipelines</h3>
-                    <p class="text-slate-300 text-sm">Build end-to-end solutions using SQL, Python, and Power Query.</p>
+                    <p class="text-slate-400 text-sm">Build end-to-end solutions using SQL, Python, and Power Query.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-yellow-900/20 rounded-full">
-                        <i class="fas fa-wave-square text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-yellow-900/20 rounded-xl"><i class="fas fa-wave-square text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Forecasting</h3>
-                    <p class="text-slate-300 text-sm">Develop predictive models to uncover trends and drive planning.</p>
+                    <p class="text-slate-400 text-sm">Develop predictive models to uncover trends and drive planning.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-red-900/20 rounded-full">
-                        <i class="fas fa-table text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-red-900/20 rounded-xl"><i class="fas fa-table text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Data Modeling</h3>
-                    <p class="text-slate-300 text-sm">Structure clean, scalable datasets for accurate analysis and reporting.</p>
+                    <p class="text-slate-400 text-sm">Structure clean, scalable datasets for accurate analysis and reporting.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-pink-900/20 rounded-full">
-                        <i class="fas fa-scroll text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-pink-900/20 rounded-xl"><i class="fas fa-scroll text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Business Reporting</h3>
-                    <p class="text-slate-300 text-sm">Deliver reports aligned with goals, KPIs, and client needs.</p>
+                    <p class="text-slate-400 text-sm">Deliver reports aligned with goals, KPIs, and client needs.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-green-900/20 rounded-full">
-                        <i class="fas fa-handshake text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-green-900/20 rounded-xl"><i class="fas fa-handshake text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Collaboration</h3>
-                    <p class="text-slate-300 text-sm">Partner with teams across departments to solve real problems.</p>
+                    <p class="text-slate-400 text-sm">Partner with teams across departments to solve real problems.</p>
                 </div>
-
-                <div class="glass-card p-6 rounded-xl text-center">
-                    <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center bg-orange-900/20 rounded-full">
-                        <i class="fas fa-grip-vertical text-4xl text-emerald-400"></i>
-                    </div>
+                <div class="glass-card p-8 rounded-2xl text-center group hover:border-emerald-400/50 transition-all">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-orange-900/20 rounded-xl"><i class="fas fa-grip-vertical text-3xl text-emerald-400"></i></div>
                     <h3 class="font-bold mb-2">Data Storytelling</h3>
-                    <p class="text-slate-300 text-sm">Present insights clearly with visuals that drive impact.</p>
+                    <p class="text-slate-400 text-sm">Present insights clearly with visuals that drive impact.</p>
                 </div>
             </div>
         </div>
     </section>
-    
-    <section id="projects" class="py-20 px-6 bg-slate-800/30 backdrop-blur-sm">
+
+    <section id="projects" class="py-24 px-6 bg-slate-900/40">
         <div class="container mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 text-gradient">Featured Projects</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="importers.html" class="block project-card glass-card p-6 rounded-xl transition-all duration-300 hover:border-emerald-400/30 border border-transparent">
-                    <div class="mb-4 overflow-hidden rounded-lg">
-                        <img src="Assets/Projects/WideWorldImporters/compass.jpg" alt="Sales Dashboard" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Sales Analysis - Wide World Importers</h3>
-                    <p class="text-slate-300 mb-4">A data-driven analysis project optimizing sales, inventory, and profitability for WideWorldImporters.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-indigo-900/30 text-indigo-400 rounded-full text-sm">ETL</span>
-                        <span class="px-3 py-1 bg-red-900/30 text-red-400 rounded-full text-sm">Predictive Analysis</span>
-                        <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm">Machine Learning</span>
-                        <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Visualization</span>
-                    </div>
-                    <div class="text-emerald-400 hover:text-emerald-300 flex items-center">
-                        View Details <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+            <h2 class="text-4xl font-bold text-center mb-20 text-gradient">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <a href="importers.html" class="project-card glass-card overflow-hidden rounded-2xl group">
+                    <div class="h-56 overflow-hidden"><img src="Assets/Projects/WideWorldImporters/compass.jpg" alt="Sales Dashboard" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3">Sales Analysis - Wide World Importers</h3>
+                        <p class="text-slate-400 text-sm mb-6">A data-driven analysis project optimizing sales, inventory, and profitability for WideWorldImporters.</p>
+                        <div class="text-emerald-400 font-bold flex items-center text-sm uppercase tracking-wider">VIEW DETAILS <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></div>
                     </div>
                 </a>
-
-                <a href="student.html" class="block project-card glass-card p-6 rounded-xl transition-all duration-300 hover:border-emerald-400/30 border border-transparent">
-                    <div class="mb-4 overflow-hidden rounded-lg">
-                        <img src="Assets/Projects/Student Mental Health (Power Bi)/Banner1.PNG" alt="Customer Segmentation" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Survey Data - Student Mental Health Survey</h3>
-                    <p class="text-slate-300 mb-4">A student dataset revealing links between well-being, academics, and campus life for better support services.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm">Data Cleaning</span>
-                        <span class="px-3 py-1 bg-pink-900/30 text-pink-400 rounded-full text-sm">Data Transformation</span>
-                        <span class="px-3 py-1 bg-orange-900/30 text-orange-400 rounded-full text-sm">Power BI</span>
-                    </div>
-                    <div class="text-emerald-400 hover:text-emerald-300 flex items-center">
-                        View Details <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                <a href="student.html" class="project-card glass-card overflow-hidden rounded-2xl group">
+                    <div class="h-56 overflow-hidden"><img src="Assets/Projects/Student Mental Health (Power Bi)/Banner1.PNG" alt="Student Survey" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3">Survey Data - Student Mental Health Survey</h3>
+                        <p class="text-slate-400 text-sm mb-6">A student dataset revealing links between well-being, academics, and campus life for better support services.</p>
+                        <div class="text-emerald-400 font-bold flex items-center text-sm uppercase tracking-wider">VIEW DETAILS <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></div>
                     </div>
                 </a>
-
-                <a href="jobs.html" class="block project-card glass-card p-6 rounded-xl transition-all duration-300 hover:border-emerald-400/30 border border-transparent">
-                    <div class="mb-4 overflow-hidden rounded-lg">
-                        <img src="Assets/Projects/Job Analysis/banner.png" alt="Market Analysis" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Job Market Analysis - Data Analyst Jobs in Calgary, AB</h3>
-                    <p class="text-slate-300 mb-4">A job market analysis using Python and NLP to uncover top Data Analyst skills in Calgary postings.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">SerpApi</span>
-                        <span class="px-3 py-1 bg-red-900/30 text-red-400 rounded-full text-sm">Pandas</span>
-                        <span class="px-3 py-1 bg-indigo-900/30 text-indigo-400 rounded-full text-sm">Matplotlib</span>
-                        <span class="px-3 py-1 bg-orange-900/30 text-orange-400 rounded-full text-sm">Seaborn</span>
-                    </div>
-                    <div class="text-emerald-400 hover:text-emerald-300 flex items-center">
-                        View Details <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                <a href="jobs.html" class="project-card glass-card overflow-hidden rounded-2xl group">
+                    <div class="h-56 overflow-hidden"><img src="Assets/Projects/Job Analysis/banner.png" alt="Job Market" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3">Job Market Analysis - Calgary, AB</h3>
+                        <p class="text-slate-400 text-sm mb-6">A job market analysis using Python and NLP to uncover top Data Analyst skills in Calgary postings.</p>
+                        <div class="text-emerald-400 font-bold flex items-center text-sm uppercase tracking-wider">VIEW DETAILS <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></div>
                     </div>
                 </a>
-
-                <a href="crops.html" class="block project-card glass-card p-6 rounded-xl transition-all duration-300 hover:border-emerald-400/30 border border-transparent">
-                    <div class="mb-4 overflow-hidden rounded-lg">
-                        <img src="Assets/Projects/Agriculture Crops Yield (R)/Agriculture.png" alt="Financial Forecasting" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Agriculture - Crops Yield Analysis</h3>
-                    <p class="text-slate-300 mb-4">An R-based analysis linking weather patterns to crop yields, offering insights for sustainable farming strategies.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-red-900/30 text-red-400 rounded-full text-sm">Data Extraction</span>
-                        <span class="px-3 py-1 bg-orange-900/30 text-orange-400 rounded-full text-sm">R Programming</span>
-                        <span class="px-3 py-1 bg-blue-900/30 text-blue-400 rounded-full text-sm">Predictive Analysis</span>
-                    </div>
-                    <div class="text-emerald-400 hover:text-emerald-300 flex items-center">
-                        View Details <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                <a href="crops.html" class="project-card glass-card overflow-hidden rounded-2xl group">
+                    <div class="h-56 overflow-hidden"><img src="Assets/Projects/Agriculture Crops Yield (R)/Agriculture.png" alt="Agriculture Analysis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3">Agriculture - Crops Yield Analysis</h3>
+                        <p class="text-slate-400 text-sm mb-6">An R-based analysis linking weather patterns to crop yields, offering insights for sustainable farming strategies.</p>
+                        <div class="text-emerald-400 font-bold flex items-center text-sm uppercase tracking-wider">VIEW DETAILS <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></div>
                     </div>
                 </a>
-
-                <a href="retailer.html" class="block project-card glass-card p-6 rounded-xl transition-all duration-300 hover:border-emerald-400/30 border border-transparent">
-                    <div class="mb-4 overflow-hidden rounded-lg">
-                        <img src="Assets/Projects/Global Electronics Retailer (SQL)/banner.png" alt="Supply Chain" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <h3 class="text-xl font-bold mb-2">Inventory Analysis - Global Electronics Retailer</h3>
-                    <p class="text-slate-300 mb-4">A supply chain strategy ensuring steady inventory for North America amid shipping issues and global tensions.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-sm">Business Analysis</span>
-                        <span class="px-3 py-1 bg-indigo-900/30 text-indigo-400 rounded-full text-sm">SQL</span>
-                        <span class="px-3 py-1 bg-orange-900/30 text-orange-400 rounded-full text-sm">Data Cleaning</span>
-                        <span class="px-3 py-1 bg-red-900/30 text-red-400 rounded-full text-sm">Data Visualization</span>
-                    </div>
-                    <div class="text-emerald-400 hover:text-emerald-300 flex items-center">
-                        View Details <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i>
+                <a href="retailer.html" class="project-card glass-card overflow-hidden rounded-2xl group">
+                    <div class="h-56 overflow-hidden"><img src="Assets/Projects/Global Electronics Retailer (SQL)/banner.png" alt="Retail Analysis" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-3">Inventory Analysis - Global Electronics Retailer</h3>
+                        <p class="text-slate-400 text-sm mb-6">A supply chain strategy ensuring steady inventory for North America amid shipping issues and global tensions.</p>
+                        <div class="text-emerald-400 font-bold flex items-center text-sm uppercase tracking-wider">VIEW DETAILS <i data-feather="arrow-right" class="ml-2 w-4 h-4"></i></div>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-10 px-6 text-center text-slate-400 relative z-10">
-    <div class="container mx-auto">
-        <div class="flex justify-center space-x-6 mb-6">
-            <a href="https://github.com/ahmad-alsharif" target="_blank" class="inline-block p-2 hover:text-purple-400 transition-colors">
-                <i class="fab fa-github text-4xl"></i> 
-            </a>
-            <a href="https://www.linkedin.com/in/ahmad-alsharif/" target="_blank" class="inline-block p-2 hover:text-[#0A66C2] transition-colors">
-                <i class="fab fa-linkedin text-4xl"></i>
-            </a>
+    <footer class="py-16 px-6 text-center border-t border-white/5 bg-slate-950/50">
+        <div class="container mx-auto">
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="https://github.com/ahmad-alsharif" target="_blank" class="text-slate-400 hover:text-white transition-all transform hover:scale-110"><i class="fab fa-github text-3xl"></i></a>
+                <a href="https://www.linkedin.com/in/ahmad-alsharif/" target="_blank" class="text-slate-400 hover:text-[#0A66C2] transition-all transform hover:scale-110"><i class="fab fa-linkedin text-3xl"></i></a>
+            </div>
+            <p class="text-slate-500 mb-2">© 2026 Ahmad Alsharif's Portfolio. All rights reserved.</p>
+            <p class="text-xs text-slate-600 uppercase tracking-widest">Crafted with <i data-feather="heart" class="inline w-3 h-3 text-red-500 mx-1"></i> by a data enthusiast</p>
         </div>
-        <p class="mb-2">© 2026 Ahmad Alsharif's Portfolio. All rights reserved.</p>
-        <p class="text-sm">
-            Crafted with <i data-feather="heart" class="inline w-4 h-4 text-red-500"></i> by a data enthusiast
-        </p>
-    </div>
-</footer>
+    </footer>
 
     <script>
+        // High-responsivity Vanta configuration
         VANTA.NET({
             el: "#vanta-bg",
             mouseControls: true,
@@ -331,59 +271,42 @@
             scaleMobile: 1.00,
             color: 0x3b82f6,
             backgroundColor: 0x080d17,
-            points: 12.00,
-            maxDistance: 22.00,
-            spacing: 18.00
+            points: 15.00,       // Increased points for better mouse interaction
+            maxDistance: 19.00,  // Tighter distance creates a "reveal" effect under the mouse
+            spacing: 16.00,      // Uniform distribution
+            showDots: true       // Visible nodes for a technical look
         });
 
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.remove('hidden');
-            document.getElementById('mobile-menu').classList.add('flex');
-        });
+        const menuToggle = document.getElementById('menu-toggle');
+        const closeMenu = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        document.getElementById('close-menu').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.add('hidden');
-            document.getElementById('mobile-menu').classList.remove('flex');
-        });
+        menuToggle.addEventListener('click', () => mobileMenu.classList.remove('hidden'));
+        closeMenu.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
-                    document.getElementById('mobile-menu').classList.add('hidden');
-                    document.getElementById('mobile-menu').classList.remove('flex');
-                }
+                mobileMenu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             feather.replace();
-            
-            const animateOnScroll = function() {
-                const elements = document.querySelectorAll('.glass-card, .project-card');
-                elements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight / 1.2;
-                    
-                    if (elementPosition < screenPosition) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
                     }
                 });
-            };
-            
-            const cards = document.querySelectorAll('.glass-card, .project-card');
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('section, .glass-card, .project-card').forEach(el => {
+                el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+                observer.observe(el);
             });
-            
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll();
         });
     </script>
 </body>
